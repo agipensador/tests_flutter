@@ -2,7 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 //CLASSE CRIADA PARA REPRESENTAR O CÓDIGO DE PRODUÇÃO
 class EmailValidator{
-  validate(){}
+  validate({String? email}){
+    if(email == null){
+      return 'Email obrigatório';
+    }
+  }
 }
 
 //INICIALIZADOR DE TESTE
