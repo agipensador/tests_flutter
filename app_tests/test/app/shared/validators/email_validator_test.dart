@@ -1,5 +1,27 @@
-import 'package:app_tests/app/shared/validators/email_validator.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+//CLASSE CRIADA PARA REPRESENTAR O CÓDIGO DE PRODUÇÃO
+class EmailValidator {
+  validate({String? email}) {
+    // teste 1       || teste 2
+    if (email == null || email.isEmpty) {
+      return 'Email obrigatório';
+    }
+
+    //teste 3
+    //emailRegex É UM CÓDIGO REGEX PADRÃO QUE VERIFICA OS CARACTERES QUE SÃO VÁLIDOS PARA EMAIL
+    final emailRegex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    //VERIFICA SE O EMAIL QUE PASSAMOS ESTÁ EM >DESACORDO< COM OS CARACTERES DE EMAIL VÁLIDO
+    if (emailRegex.hasMatch(email)) {
+      //DEVE DAR ERRO PQ A VERIFICAÇÃO É SE FOR INVÁLIDO
+      return 'Email válido';
+    } else {
+      //O TESTE É APROVADO POIS É ISTO QUE ELE ESPERA
+      return 'Email inválido';
+    }
+  }
+}
 
 //INICIALIZADOR DE TESTE
 void main() {
@@ -37,13 +59,13 @@ void main() {
       expect(result, equals('Email inválido'));
     });
 
-    //TESTE 4
+    //TESTE 3
     //O QUE ESSA FUNÇÃO TEST FARÁ?
     test('Retornar nulo se o email for válido', () {
       //SE O EMAIL TIVER @, .COM.... É UM EMAIL VÁLIDO
       final result = emailValidator.validate(email: 'teste@com.com.br');
       //VERIFICA SE O EMAIL É NULO
-      expect(result, equals('Email válido'));
+      expect(result, isNull);
     });
   });
 }
