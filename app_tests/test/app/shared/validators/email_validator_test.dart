@@ -15,7 +15,7 @@ class EmailValidator {
     //VERIFICA SE O EMAIL QUE PASSAMOS ESTÁ EM >DESACORDO< COM OS CARACTERES DE EMAIL VÁLIDO
     if (emailRegex.hasMatch(email)) {
       //DEVE DAR ERRO PQ A VERIFICAÇÃO É SE FOR INVÁLIDO
-      return 'Email válido';
+      return null;
     } else {
       //O TESTE É APROVADO POIS É ISTO QUE ELE ESPERA
       return 'Email inválido';
