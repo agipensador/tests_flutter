@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 //CLASSE CRIADA PARA REPRESENTAR O CÓDIGO DE PRODUÇÃO
 class EmailValidator{
   validate({String? email}){
-    if(email == null){
+    // teste 1       || teste 2
+    if(email == null || email.isEmpty){
       return 'Email obrigatório';
     }
   }
@@ -24,6 +25,12 @@ void main(){
       test('Retornar erro caso email igual nulo', () {
         final result = emailValidator.validate();
         //VERIFICA SE O RESULTADO ESPERRADO É IGUAL A: Email obrigatório
+        expect(result, equals('Email obrigatório'));
+      });
+      //O QUE ESSA FUNÇÃO TEST FARÁ?
+      test('Retornar erro se o email for vazio', () {
+        final result = emailValidator.validate(email: '');
+        //VERIFICA SE O EMAIL É != DE VAZIO
         expect(result, equals('Email obrigatório'));
       });
   });
