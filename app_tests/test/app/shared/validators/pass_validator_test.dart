@@ -1,26 +1,5 @@
+import 'package:app_tests/app/shared/validators/pass_validator.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-class PassValidator {
-  validate({String? pass}){
-    //TESTE 1       ||TESTE 2
-    if (pass == null || pass.isEmpty) {
-      return 'Senha obrigatória';
-    }
-
-    //TESTE 3
-    if(pass.length <6){
-      return 'A senha deve possuir pelo menos 6 caracteres';
-    }
-
-    final alphanumeric = RegExp(r"^(?=.*[a-zA-Z])(?=.*[0-9]).+$");
-    //TESTE 4
-    if(alphanumeric.hasMatch(pass)){
-      return null;
-    }else {
-      return 'A senha deve ser alfanumérica';
-    }
-  }
-}
 
 //INICIALIZADOR DE TESTE
 main() {
@@ -62,7 +41,7 @@ main() {
     test('Retornar erro se a senha não for alfanumérica', () {
       //TESTE C/ + DE 6 CARACTERES P/ PASSAR NO TESTE 3
       final result = passValidator.validate(pass: 'testesenha');
-      //VERIFICA SE A SENHA É ALFANUMÉRICA
+      //VERIFICA SE A SENHA NÃO É ALFANUMÉRICA
       expect(result, equals('A senha deve ser alfanumérica'));
     });
 
