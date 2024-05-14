@@ -59,7 +59,7 @@ void main() {
       expect(result, equals('Email inválido'));
     });
 
-    //TESTE 3
+    //TESTE 4
     //O QUE ESSA FUNÇÃO TEST FARÁ?
     test('Retornar nulo se o email for válido', () {
       //SE O EMAIL TIVER @, .COM.... É UM EMAIL VÁLIDO
