@@ -53,7 +53,7 @@ void main() {
 
     //TESTE 3
     //O QUE ESSA FUNÇÃO TESTWIDGET FARÁ?
-    testWidgets("Exibir SnackBar caso o EMAIL seja nulo",
+    testWidgets("Exibir SnackBar caso o EMAIL seja NULO",
 
             //PARÂMETRO/VARIÁVEL PARA UTILIZAR NA FUNÇÃO(widgetTester)
             (widgetTester) async {
@@ -76,6 +76,47 @@ void main() {
             //VERIFICA SE EXISTE O CASO DE ERRO Email obrigatório (TO UPPERCASE(MAIÚSCULO))
             //findsOneWidget SIGNIFICA 1 WIDGET QUE CONTENHA ISSO
             expect(find.text("Email obrigatório".toUpperCase()), findsOneWidget);
+        });
+
+
+    //TESTE 4
+    //O QUE ESSA FUNÇÃO TESTWIDGET FARÁ?
+    testWidgets("Exibir SnackBar caso o EMAIL seja VAZIO",
+
+        //PARÂMETRO/VARIÁVEL PARA UTILIZAR NA FUNÇÃO(widgetTester)
+            (widgetTester) async {
+
+          //pumpWidget RENDERIZA TODA A TELA, INICIALIZANDO O MATERIAL E O REGISTER
+          await widgetTester.pumpWidget(
+
+            //IMPORTANTE O MATERIA APP PQ A TELA REGISTERSCREEN NÃO POSSUI O MATERIALAPP
+            //E PARA TELA FLUTTER BUILDAR É NECESSÁRIO O MATERIAL
+              const MaterialApp(home: RegisterScreen()));
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "email"
+          final campoEmail = find.byKey(const Key("email"));
+          //BUSCA E CLICA NO TEXTFORMFIELD COM KEY email
+          await widgetTester.tap(campoEmail);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          // DEIXA O TEXTO DA KEY email VAZIO ''
+          await widgetTester.enterText(campoEmail, '');
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "register"
+          final button = find.byKey(const Key("register"));
+
+          //BUSCA E CLICA NO BOTÃO COM KEY register
+          await widgetTester.tap(button);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          //VERIFICA SE EXISTE O CASO DE ERRO Email obrigatório (TO UPPERCASE(MAIÚSCULO))
+          //findsOneWidget SIGNIFICA 1 WIDGET QUE CONTENHA ISSO
+          expect(find.text("Email obrigatório".toUpperCase()), findsOneWidget);
         });
   });
 }
