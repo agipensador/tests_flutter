@@ -1,3 +1,4 @@
+import 'package:app_tests/app/shared/auth/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +10,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  //ESTES CONTROLLERS NÃO FAZEM PARTE DO TESTE, MAS GERENCIAM OS TEXTOS DO TEXTFORMFIELD
   final TextEditingController emailTextEditingController =
       TextEditingController();
   final TextEditingController passTextEditingController =
       TextEditingController();
+
+  //INSTANCIANDO/INICIANDO A AUTENTICAÇÃO (ACESSA A CLASSE AUTH SERVICE)
+  final Auth _auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +60,29 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   child: OutlinedButton(
                     //O TESTE LOCALIZA ESTE WIDGET POR CONTA DA KEY "register"
-                  key: const Key("register"),
-                    onPressed: () {},
+                    key: const Key("register"),
+                    onPressed: () {
+                      //VARIÁVEL PARA SALVAR O RETORNO/RESULTADO DA FUNÇÃO RESULT
+                      final result =
+                          //CHAMA A FUNÇÃO DE AUTH
+                          _auth.register(
+                              //BUSCAMOS O TEXTO DO TEXTFORMFIEL DE EMAIL
+                              emailTextEditingController.text,
+                              //BUSCAMOS O TEXTO DO TEXTFORMFIEL DE PASSWORD
+                              passTextEditingController.text);
+
+                      if (result == null) {
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(
+                          content: Text(
+                            result.toString().toUpperCase(),
+                            textAlign: TextAlign.center,
+                          ),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+                    },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 12),
                       child: Text('CADASTRE-SE'),
