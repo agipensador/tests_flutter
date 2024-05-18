@@ -8,14 +8,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
+  final TextEditingController emailTextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Testes'),
       ),
-      body: Container(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextFormField(
+              //O TESTE LOCALIZA ESTE WIDGET POR CONTA DESTA KEY "email"
+              key: const Key('email'),
+              controller: emailTextEditingController ,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                  hintText: 'Email',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
