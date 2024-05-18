@@ -1,15 +1,14 @@
 import 'package:app_tests/app/shared/auth/auth_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _RegisterScreenState extends State<RegisterScreen> {
   //ESTES CONTROLLERS NÃO FAZEM PARTE DO TESTE, MAS GERENCIAM OS TEXTOS DO TEXTFORMFIELD
   final TextEditingController emailTextEditingController =
       TextEditingController();
@@ -71,11 +70,14 @@ class _MyAppState extends State<MyApp> {
                               //BUSCAMOS O TEXTO DO TEXTFORMFIEL DE PASSWORD
                               passTextEditingController.text);
 
+                      //VERIFICA SE DEU CERTO (SE RESULT == NULL É PQ NÃO TEM PROBLEMA NO CADASTRO)
                       if (result == null) {
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(
+                      }
+                      //SE NÃO, BUSCA O ERRO
+                      else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
+                            //E CITA O RESULTADO DO ERRO
                             result.toString().toUpperCase(),
                             textAlign: TextAlign.center,
                           ),
