@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatefulWidget {
@@ -8,8 +9,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final TextEditingController emailTextEditingController = TextEditingController();
-  final TextEditingController passTextEditingController = TextEditingController();
+  final TextEditingController emailTextEditingController =
+      TextEditingController();
+  final TextEditingController passTextEditingController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class _MyAppState extends State<MyApp> {
               //O TESTE LOCALIZA ESTE WIDGET POR CONTA DA KEY "pass"
               key: const Key('pass'),
               controller: passTextEditingController,
-              keyboardType: TextInputType. visiblePassword,
+              obscureText: true,
               decoration: const InputDecoration(
                 hintText: 'Senha',
                 border: OutlineInputBorder(
@@ -46,6 +49,22 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    //O TESTE LOCALIZA ESTE WIDGET POR CONTA DA KEY "register"
+                  key: const Key("register"),
+                    onPressed: () {},
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      child: Text('CADASTRE-SE'),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
