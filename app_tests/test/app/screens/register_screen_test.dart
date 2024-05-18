@@ -449,4 +449,132 @@ void main() {
           expect(find.text("A senha deve ser alfanumérica".toUpperCase()), findsNothing);
         });
   });
+
+
+  //GRUPO BOTÃO CADASTRE-SE
+  group(
+    //O QUE ESSE GRUPO FARÁ?
+  "Validar o botão de Cadastro", () {
+
+    //TESTE 1 CADASTRO
+    //O QUE ESSA FUNÇÃO TESTWIDGET FARÁ?
+    testWidgets("Confirmar que o BOTÃO aparece corretamente na tela",
+
+        //PARÂMETRO/VARIÁVEL PARA UTILIZAR NA FUNÇÃO(widgetTester)
+            (widgetTester) async {
+
+          //pumpWidget RENDERIZA TODA A TELA, INICIALIZANDO O MATERIAL E O REGISTER
+          await widgetTester.pumpWidget(
+
+            //IMPORTANTE O MATERIA APP PQ A TELA REGISTERSCREEN NÃO POSSUI O MATERIALAPP
+            //E PARA TELA FLUTTER BUILDAR É NECESSÁRIO O MATERIAL
+              const MaterialApp(home: RegisterScreen()));
+
+          //PARA RECUPERAR A CHAVE DE PASS PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "register"
+          final registerButton = find.byKey(const Key("register"));
+
+          //VERIFICA register SE ESTÁ REALMENTE SENDO EXIBIDO NA TELA
+          expect(registerButton, findsOneWidget);
+        });
+
+    //TESTE 2 CADASTRO
+    //O QUE ESSA FUNÇÃO TESTWIDGET FARÁ?
+    testWidgets("Confirmar que uma SNACKBAR aparece APÓS o clique no BOTÃO CADASTRE-SE",
+
+        //PARÂMETRO/VARIÁVEL PARA UTILIZAR NA FUNÇÃO(widgetTester)
+            (widgetTester) async {
+
+          //pumpWidget RENDERIZA TODA A TELA, INICIALIZANDO O MATERIAL E O REGISTER
+          await widgetTester.pumpWidget(
+
+            //IMPORTANTE O MATERIA APP PQ A TELA REGISTERSCREEN NÃO POSSUI O MATERIALAPP
+            //E PARA TELA FLUTTER BUILDAR É NECESSÁRIO O MATERIAL
+              const MaterialApp(home: RegisterScreen()));
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "email"
+          final campoEmail = find.byKey(const Key("email"));
+          //BUSCA E CLICA NO TEXTFORMFIELD COM KEY email
+          await widgetTester.tap(campoEmail);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          // DEIXA O TEXTO DA KEY email VÁLIDO
+          await widgetTester.enterText(campoEmail, 'email_invalido.com');
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "pass"
+          final campoPass = find.byKey(const Key("pass"));
+          //BUSCA E CLICA NO TEXTFORMFIELD COM KEY pass
+          await widgetTester.tap(campoPass);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          // O TEXTO DA KEY É MENOR QUE 6 CARACTERES
+          await widgetTester.enterText(campoPass, 'curta');
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "register"
+          final button = find.byKey(const Key("register"));
+          //BUSCA E CLICA NO BOTÃO COM KEY register
+          await widgetTester.tap(button);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          //VERIFICA register SE ESTÁ REALMENTE SENDO EXIBIDO NA TELA
+          expect(find.byType(SnackBar), findsOneWidget);
+        });
+
+    //TESTE 3 CADASTRO
+    //O QUE ESSA FUNÇÃO TESTWIDGET FARÁ?
+    testWidgets("Confirmar que NENHUMA SNACKBAR aparece APÓS o clique no BOTÃO CADASTRE-SE se EMAIL e SENHA VALIDOS",
+
+        //PARÂMETRO/VARIÁVEL PARA UTILIZAR NA FUNÇÃO(widgetTester)
+            (widgetTester) async {
+
+          //pumpWidget RENDERIZA TODA A TELA, INICIALIZANDO O MATERIAL E O REGISTER
+          await widgetTester.pumpWidget(
+
+            //IMPORTANTE O MATERIA APP PQ A TELA REGISTERSCREEN NÃO POSSUI O MATERIALAPP
+            //E PARA TELA FLUTTER BUILDAR É NECESSÁRIO O MATERIAL
+              const MaterialApp(home: RegisterScreen()));
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "email"
+          final campoEmail = find.byKey(const Key("email"));
+          //BUSCA E CLICA NO TEXTFORMFIELD COM KEY email
+          await widgetTester.tap(campoEmail);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          // DEIXA O TEXTO DA KEY email VÁLIDO
+          await widgetTester.enterText(campoEmail, 'email@valido.com');
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "pass"
+          final campoPass = find.byKey(const Key("pass"));
+          //BUSCA E CLICA NO TEXTFORMFIELD COM KEY pass
+          await widgetTester.tap(campoPass);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          // O TEXTO DA KEY É MENOR QUE 6 CARACTERES
+          await widgetTester.enterText(campoPass, 'valida123');
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+
+          //PARA RECUPERAR A CHAVE DE REGISTER PRECISA SER EXATAMENTE O MESMO TEXTO DA KEY DECLARADA "register"
+          final button = find.byKey(const Key("register"));
+          //BUSCA E CLICA NO BOTÃO COM KEY register
+          await widgetTester.tap(button);
+          //pumpAndSettle RENDERIZA A TELA APÓS O CLIQUE E DEIXA PRONTA PRO PRÓXIMO COMANDO/TESTE
+          await widgetTester.pumpAndSettle();
+
+          //VERIFICA register SE ESTÁ REALMENTE SENDO EXIBIDO NA TELA
+          expect(find.byType(SnackBar), findsNothing);
+        });
+  });
 }
