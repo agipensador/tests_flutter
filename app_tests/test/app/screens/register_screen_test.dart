@@ -18,7 +18,7 @@ void main() {
           //pumpWidget RENDERIZA TODA A TELA, INICIALIZANDO O MATERIAL E O REGISTER
           await widgetTester.pumpWidget(
 
-          //IMPORTANTE O MATERIA APP PQ A TELA REGISTERSCREEN NÃO POSSUI O MATERIALAPP
+          //IMPORTANTE O MATERIAL APP PQ A TELA REGISTER SCREEN NÃO POSSUI O MATERIAL APP
           //E PARA TELA FLUTTER BUILDAR É NECESSÁRIO O MATERIAL
           const MaterialApp(home: RegisterScreen()));
 
